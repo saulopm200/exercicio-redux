@@ -1,11 +1,15 @@
+import { useDispatch } from 'react-redux'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+
 import { Produto as ProdutoType } from '../../App'
 import * as S from './styles'
 
+import { adicionar } from '../../store/reducers/carrinho'
+import { favoritar } from '../../store/reducers/favoritar'
+import { useState } from 'react'
+
 type Props = {
   produto: ProdutoType
-  aoComprar: (produto: ProdutoType) => void
-  favoritar: (produto: ProdutoType) => void
-  estaNosFavoritos: boolean
 }
 
 export const paraReal = (valor: number) =>
@@ -13,12 +17,12 @@ export const paraReal = (valor: number) =>
     valor
   )
 
-const ProdutoComponent = ({
-  produto,
-  aoComprar,
-  favoritar,
-  estaNosFavoritos
-}: Props) => {
+const ProdutoComponent = ({ produto }: Props) => {
+  const dispatch = useDispatch()
+
+  const [adicionadosAoCarrinho, setAdicionadosAoCarrinho] = useState(false)
+  const [adicionadosAosFavoritos, setAdicionadosAosFavoritos] = useState(false)
+
   return (
     <S.Produto>
       <S.Capa>
@@ -28,14 +32,28 @@ const ProdutoComponent = ({
       <S.Prices>
         <strong>{paraReal(produto.preco)}</strong>
       </S.Prices>
-      <S.BtnComprar onClick={() => favoritar(produto)} type="button">
-        {estaNosFavoritos
-          ? '- Remover dos favoritos'
-          : '+ Adicionar aos favoritos'}
-      </S.BtnComprar>
-      <S.BtnComprar onClick={() => aoComprar(produto)} type="button">
-        Adicionar ao carrinho
-      </S.BtnComprar>
+      <S.AreaBtn>
+        <S.BtnComprar
+          onClick={() => {
+            dispatch(adicionar(produto))
+            setAdicionadosAoCarrinho(!adicionadosAoCarrinho)
+          }}
+          type="button"
+        >
+          {adicionadosAoCarrinho
+            ? 'Remover Do Carrinho'
+            : 'Adicionar Ao Carrinho'}
+        </S.BtnComprar>
+        <S.BtnFavorito
+          onClick={() => {
+            dispatch(favoritar(produto))
+            setAdicionadosAosFavoritos(!adicionadosAosFavoritos)
+          }}
+          type="button"
+        >
+          {adicionadosAosFavoritos ? <AiFillHeart /> : <AiOutlineHeart />}
+        </S.BtnFavorito>
+      </S.AreaBtn>
     </S.Produto>
   )
 }
