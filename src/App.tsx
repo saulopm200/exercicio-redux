@@ -5,7 +5,7 @@ import Produtos from './containers/Produtos'
 
 import { GlobalStyle } from './styles'
 
-import { store } from './store'
+import { store } from './containers/services/store/reducers/index'
 
 export type Produto = {
   id: number
