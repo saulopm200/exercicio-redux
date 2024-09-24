@@ -6,7 +6,7 @@ import * as S from './styles'
 import cesta from '../../assets/cesta.png'
 import { paraReal } from '../Produto'
 
-import { RootReducer } from '../../store'
+import { RootReducer } from '../../containers/services/store/reducers/index'
 
 const Header = () => {
   const itensNoCarrinho = useSelector(

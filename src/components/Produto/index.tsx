@@ -4,8 +4,8 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { Produto as ProdutoType } from '../../App'
 import * as S from './styles'
 
-import { adicionar } from '../../store/reducers/carrinho'
-import { favoritar } from '../../store/reducers/favoritar'
+import { adicionar } from '../../containers/services/store/reducers/carrinho'
+import { favoritar } from '../../containers/services/store/reducers/favoritar'
 import { useState } from 'react'
 
 type Props = {

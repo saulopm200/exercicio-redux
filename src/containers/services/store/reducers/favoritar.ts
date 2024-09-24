@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { Produto } from '../../App'
+import { Produto } from '../../../../App'
 
 type FavoritoState = {
   itens: Produto[]
